@@ -1,0 +1,46 @@
+Credissimo\Shop\Domain\Model\Product:
+    repositoryClass: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineProductRepository
+    type: entity
+    table: product
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        name:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+        description:
+            type: string
+        model:
+            type: string
+            length: 32
+        yearOfManufacture:
+            type: datetime
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+
+    OneToMany:
+        productImages:
+            targetEntity: ProductImages
+            mappedBy: product
+    ManyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: products
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+        manufacture:
+            targetEntity: Manufacture
+            inversedBy: products
+            joinColumn:
+                name: manufacture_id
+                referencedColumnName: id

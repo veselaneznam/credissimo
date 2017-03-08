@@ -1,0 +1,29 @@
+Credissimo\Shop\Domain\Model\ProductImage:
+    repositoryClass: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineProductImageRepository
+    type: entity
+    table: product_image
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        src:
+            type: string
+            length: 255
+        title:
+            type: string
+            length: 255
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+
+    ManyToOne:
+        product:
+            targetEntity: Product
+            inversedBy: productImages
+            joinColumn:
+                name: product_id
+                referencedColumnName: id
