@@ -4,10 +4,11 @@ namespace Credissimo\Shop\Domain\Model;
 
 use Credissimo\Shop\Domain\Value\Description;
 use Credissimo\Shop\Domain\Value\Slug;
+use Credissimo\User\Domain\Model\User;
 
 class Product
 {
-    /** @var int*/
+    /** @var int */
     private $id;
 
     /** @var string */
@@ -19,7 +20,7 @@ class Product
     /** @var Description */
     private $description;
 
-    /** @var ProductImage[]*/
+    /** @var ProductImage[] */
     private $productImages;
 
     /** @var Category */
@@ -40,9 +41,15 @@ class Product
     /** @var \DateTime */
     private $yearOfManufacture;
 
+    /** @var float */
+    private $price;
+
+    /** @var User */
+    private $user;
+
     /**
      * @param int            $id
-     * @param                $name
+     * @param string         $name
      * @param Slug           $slug
      * @param Description    $description
      * @param ProductImage[] $productImages
@@ -50,6 +57,8 @@ class Product
      * @param Manufacture    $manufacture
      * @param string         $model
      * @param \DateTime      $yearOfManufacture
+     * @param float          $price
+     * @param User           $user
      */
     public function __construct(
         $id,
@@ -60,7 +69,9 @@ class Product
         Category $category,
         Manufacture $manufacture,
         $model,
-        \DateTime $yearOfManufacture
+        \DateTime $yearOfManufacture,
+        $price,
+        User $user
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -71,6 +82,16 @@ class Product
         $this->manufacture = $manufacture;
         $this->model = $model;
         $this->yearOfManufacture = $yearOfManufacture;
+        $this->price = $price;
+        $this->user = $user;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     /**
@@ -159,5 +180,13 @@ class Product
     public function getYearOfManufacture()
     {
         return $this->yearOfManufacture;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

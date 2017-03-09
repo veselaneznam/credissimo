@@ -21,6 +21,8 @@ Credissimo\Shop\Domain\Model\Product:
             length: 32
         yearOfManufacture:
             type: datetime
+        price:
+            type: decimal
         createdAt:
             type: datetime
         updatedAt:
@@ -43,4 +45,10 @@ Credissimo\Shop\Domain\Model\Product:
             inversedBy: products
             joinColumn:
                 name: manufacture_id
+                referencedColumnName: id
+        user:
+            targetEntity: User
+            inversedBy: products
+            joinColumn:
+                name: user_id
                 referencedColumnName: id

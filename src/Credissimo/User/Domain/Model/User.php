@@ -2,6 +2,7 @@
 
 namespace Credissimo\User\Domain\Model;
 
+use Credissimo\Shop\Domain\Model\Product;
 use FOS\UserBundle\Model\User as BaseUser;
 
 class User extends BaseUser
@@ -10,21 +11,15 @@ class User extends BaseUser
     /** @var int */
     protected $id;
 
-    /** @var \DateTime */
-    private $createdAt;
-
-    /** @var  \DateTime */
-    private $updatedAt;
-
-    /** @var string */
-    private $name;
+    /** @var Product[] */
+    private $products;
 
     /**
-     * @return mixed
+     * @return Product[]
      */
-    public function getCreatedAt()
+    public function getProducts()
     {
-        return $this->createdAt;
+        return $this->products;
     }
 
     /**
@@ -81,21 +76,5 @@ class User extends BaseUser
     public function getRoles()
     {
         return $this->roles;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }

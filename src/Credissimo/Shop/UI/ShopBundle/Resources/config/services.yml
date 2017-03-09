@@ -1,0 +1,10 @@
+services:
+    credissimo.product_repository:
+        class: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineProductRepository
+        factory: ["@doctrine", getRepository]
+        arguments: [ Credissimo\Shop\Domain\Model\Product ]
+
+    credissimo.product_query_service:
+        class: Credissimo\Shop\Application\ProductQueryService
+        arguments:
+            - "@credissimo.product_repository"
