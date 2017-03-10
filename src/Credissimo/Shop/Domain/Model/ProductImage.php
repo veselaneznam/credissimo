@@ -23,14 +23,12 @@ class ProductImage
     private $updatedAt;
 
     /**
-     * @param int       $id
      * @param string    $src
      * @param string    $title
      * @param Product   $product
      */
-    public function __construct($id, $src, $title, Product $product)
+    public function __construct($src, $title, Product $product)
     {
-        $this->id = $id;
         $this->src = $src;
         $this->title = $title;
         $this->product = $product;

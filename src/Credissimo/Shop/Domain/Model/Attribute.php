@@ -28,15 +28,13 @@ class Attribute
     private $updatedAt;
 
     /**
-     * @param int            $id
      * @param string         $name
      * @param string         $label
      * @param AttributeTypes $type
      * @param Category       $category
      */
-    public function __construct($id, $name, $label, AttributeTypes $type, Category $category)
+    public function __construct($name, $label, AttributeTypes $type, Category $category)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->label = $label;
         $this->type = $type;

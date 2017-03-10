@@ -1,8 +1,13 @@
 <?php
 
-namespace Credissimo\Shop\Domain\Model;
+namespace Credissimo\Shop\Application\Category;
 
-class Category
+use Credissimo\Shop\Domain\Model\Attribute;
+use Credissimo\Shop\Domain\Model\Category;
+use Credissimo\Shop\Domain\Model\Manufacture;
+use Credissimo\Shop\Domain\Model\Product;
+
+class CategoryRepresentation
 {
     /** @var int */
     private $id;
@@ -19,28 +24,16 @@ class Category
     /** @var Manufacture[] */
     private $manufactures;
 
-    /** @var \DateTime */
-    private $createdAt;
-
-    /** @var \DateTime */
-    private $updatedAt;
-
     /**
-     * @param string       $name
-     * @param Product[]    $products
-     * @param Attribute[]  $attributes
-     * @param Manufacture[] $manufactures
+     * @param Category $category
      */
-    public function __construct(
-        $name,
-        array $products,
-        array $attributes,
-        array $manufactures
-    ) {
-        $this->name = $name;
-        $this->products = $products;
-        $this->attributes = $attributes;
-        $this->manufactures = $manufactures;
+    public function __construct(Category $category)
+    {
+        $this->id = $category->getId();
+        $this->name = $category->getName();
+        $this->products = $category->getProducts();
+        $this->attributes = $category->getAttributes();
+        $this->manufactures = $category->getManufactures();
     }
 
     /**
@@ -76,26 +69,10 @@ class Category
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
      * @return Manufacture[]
      */
     public function getManufactures()
     {
         return $this->manufactures;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

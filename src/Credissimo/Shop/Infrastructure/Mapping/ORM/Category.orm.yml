@@ -25,3 +25,6 @@ Credissimo\Shop\Domain\Model\Category:
         attributes:
             targetEntity: Attribute
             mappedBy: category
+        manufactures:
+            targetEntity: Manufacture
+            mappedBy: category

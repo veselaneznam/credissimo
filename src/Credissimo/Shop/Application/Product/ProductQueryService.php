@@ -1,6 +1,6 @@
 <?php
 
-namespace Credissimo\Shop\Application;
+namespace Credissimo\Shop\Application\Product;
 
 use Credissimo\Shop\Domain\Model\Product;
 use Credissimo\Shop\Domain\Repository\ProductRepository;
@@ -26,6 +26,11 @@ class ProductQueryService
         return $this->productRepository->findAll();
     }
 
+    /**
+     * @param $productId
+     *
+     * @return Product
+     */
     public function getProduct($productId)
     {
         return $this->productRepository->findOneById($productId);

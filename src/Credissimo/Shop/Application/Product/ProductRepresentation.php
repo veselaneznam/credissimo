@@ -1,12 +1,16 @@
 <?php
 
-namespace Credissimo\Shop\Domain\Model;
+namespace Credissimo\Shop\Application\Product;
 
+use Credissimo\Shop\Domain\Model\Category;
+use Credissimo\Shop\Domain\Model\Manufacture;
+use Credissimo\Shop\Domain\Model\Product;
+use Credissimo\Shop\Domain\Model\ProductImage;
 use Credissimo\Shop\Domain\Value\Description;
 use Credissimo\Shop\Domain\Value\Slug;
 use Credissimo\User\Domain\Model\User;
 
-class Product
+class ProductRepresentation
 {
     /** @var int */
     private $id;
@@ -47,48 +51,19 @@ class Product
     /** @var User */
     private $user;
 
-    /**
-     * @param string         $name
-     * @param Slug           $slug
-     * @param Description    $description
-     * @param ProductImage[] $productImages
-     * @param Category       $category
-     * @param Manufacture    $manufacture
-     * @param string         $model
-     * @param \DateTime      $yearOfManufacture
-     * @param float          $price
-     * @param User           $user
-     */
-    public function __construct(
-        $name,
-        Slug $slug,
-        Description $description,
-        array $productImages,
-        Category $category,
-        Manufacture $manufacture,
-        $model,
-        \DateTime $yearOfManufacture,
-        $price,
-        User $user
-    ) {
-        $this->name = $name;
-        $this->slug = $slug;
-        $this->description = $description;
-        $this->productImages = $productImages;
-        $this->category = $category;
-        $this->manufacture = $manufacture;
-        $this->model = $model;
-        $this->yearOfManufacture = $yearOfManufacture;
-        $this->price = $price;
-        $this->user = $user;
-    }
-
-    /**
-     * @return float
-     */
-    public function getPrice()
+    public function __construct(Product $product)
     {
-        return $this->price;
+        $this->id = $product->getId();
+        $this->name = $product->getName();
+        $this->slug = $product->getSlug();
+        $this->description = $product->getDescription();
+        $this->productImages = $product->getProductImages();
+        $this->category = $product->getCategory();
+        $this->manufacture = $product->getManufacture();
+        $this->model = $product->getModel();
+        $this->yearOfManufacture = $product->getYearOfManufacture();
+        $this->price = $product->getPrice();
+        $this->user = $product->getUser();
     }
 
     /**
@@ -97,6 +72,14 @@ class Product
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -132,14 +115,6 @@ class Product
     }
 
     /**
-     * @return Manufacture
-     */
-    public function getManufacture()
-    {
-        return $this->manufacture;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -156,6 +131,14 @@ class Product
     }
 
     /**
+     * @return Manufacture
+     */
+    public function getManufacture()
+    {
+        return $this->manufacture;
+    }
+
+    /**
      * @return string
      */
     public function getModel()
@@ -164,19 +147,19 @@ class Product
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getYearOfManufacture()
     {
         return $this->yearOfManufacture;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     /**

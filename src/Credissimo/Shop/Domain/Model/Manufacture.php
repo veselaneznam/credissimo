@@ -13,6 +13,9 @@ class Manufacture
     /** @var Product[] */
     private $products;
 
+    /** @var Category */
+    private $category;
+
     /** @var \DateTime */
     private $createdAt;
 
@@ -20,15 +23,15 @@ class Manufacture
     private $updatedAt;
 
     /**
-     * @param int       $id
      * @param string    $name
      * @param Product[] $products
+     * @param Category  $category
      */
-    public function __construct($id, $name, array $products)
+    public function __construct ($name, array $products, Category $category)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->products = $products;
+        $this->category = $category;
     }
 
     /**
@@ -53,6 +56,14 @@ class Manufacture
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**

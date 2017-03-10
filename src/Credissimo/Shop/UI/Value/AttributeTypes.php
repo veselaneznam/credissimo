@@ -1,6 +1,6 @@
 <?php
 
-namespace Credissimo\Shop\Domain\Value;
+namespace Credissimo\Shop\UI\Value;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;

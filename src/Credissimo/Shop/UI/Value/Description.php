@@ -1,13 +1,13 @@
 <?php
 
-namespace Credissimo\Shop\Domain\Value;
+namespace Credissimo\Shop\UI\Value;
 
-use Credissimo\Shop\Domain\Model\Attribute;
+use Credissimo\Shop\Application\Attribute\AttributeRepresentation;
 
 class Description implements \Serializable
 {
     /**
-     * @var Attribute[]
+     * @var AttributeRepresentation[]
      */
     private $attributes;
 
@@ -18,7 +18,7 @@ class Description implements \Serializable
     private $description = [];
 
     /**
-     * @param Attribute[] $attributes
+     * @param AttributeRepresentation[] $attributes
      * @param mixed[]    $data
      */
     public function __construct(array $attributes, array $data)
@@ -32,7 +32,7 @@ class Description implements \Serializable
     {
         foreach ($this->attributes as $attribute) {
             if(!empty($this->data[$attribute->getName()])) {
-                $this->description[] = new AttributeValue($attribute, $this->data[$attribute->getName()]);
+                $this->description[$attribute->getName()] = new AttributeValue($attribute, $this->data[$attribute->getName()]);
             }
         }
     }

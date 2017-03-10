@@ -22,3 +22,10 @@ Credissimo\Shop\Domain\Model\Manufacture:
         products:
             targetEntity: Product
             mappedBy: manufacture
+    ManyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: manufactures
+            joinColumn:
+                name: category_id
+                referencedColumnName: id

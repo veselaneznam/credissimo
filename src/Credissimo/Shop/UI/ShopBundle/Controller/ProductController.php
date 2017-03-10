@@ -2,15 +2,14 @@
 
 namespace Credissimo\Shop\UI\ShopBundle\Controller;
 
-use Credissimo\Shop\Application\ProductQueryService;
+use Credissimo\Shop\Application\Product\ProductQueryService;
+use Credissimo\Shop\UI\ShopBundle\Form\ProductFormHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @Route("/", name="homepage")
- */
+
 class ProductController extends Controller
 {
     /**
@@ -36,20 +35,34 @@ class ProductController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/product/add", name="homepage")
+     * @Route("/product/add", name="create_product")
      * @return Response
      */
     public function addAction(Request $request)
     {
-        /**
-         * @var ProductQueryService $productService
-         */
-        $productService = $this->get('credissimo.product_query_service');
+        $manufactureService = $this->get('credissimo.manufacture_query_service');
+        $manufacterList = $manufactureService->getManufacturesAsOptionList();
 
-        $products = $productService->getProducts();
+        $productForm = ProductFormHelper::createForm($this->createFormBuilder(), $manufacterList);
 
-        return $this->render('@Shop/product/list.html.twig', array(
-            'products' => $products
+        $productForm->handleRequest($request);
+
+        if ($productForm->isSubmitted() && $productForm->isValid()) {
+
+            $data = $productForm->getData();
+
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+            // $em = $this->getDoctrine()->getManager();
+            // $em->persist($task);
+            // $em->flush();
+
+            return $this->redirectToRoute('homepage');
+        }
+
+
+        return $this->render('@Shop/product/product.html.twig', array(
+            'form' => $productForm->createView()
         ));
     }
 
