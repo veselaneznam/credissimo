@@ -46,4 +46,9 @@ interface ProductRepository
      * @param Product $product
      */
     public function save(Product $product);
+
+    /**
+     * @param Product $product
+     */
+    public function delete(Product $product);
 }

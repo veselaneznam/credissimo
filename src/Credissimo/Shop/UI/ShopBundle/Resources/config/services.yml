@@ -38,3 +38,24 @@ services:
         class: Credissimo\Shop\Application\Attribute\AttributeQueryService
         arguments:
             - "@credissimo.attribute_repository"
+
+    credissimo.product_service:
+        class: Credissimo\Shop\Application\Product\ProductService
+        arguments:
+            - "@credissimo.product_repository"
+
+    credissimo.manufacture_service:
+        class: Credissimo\Shop\Application\Manufacture\ManufactureService
+        arguments:
+            - "@credissimo.manufacture_repository"
+
+    credissimo.attribute_service:
+        class: Credissimo\Shop\Application\Attribute\AttributeService
+        arguments:
+            - "@credissimo.attribute_repository"
+
+
+    credissimo.category_service:
+        class: Credissimo\Shop\Application\Category\CategoryService
+        arguments:
+            - "@credissimo.category_repository"

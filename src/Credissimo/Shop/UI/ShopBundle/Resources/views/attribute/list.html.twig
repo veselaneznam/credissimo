@@ -1,0 +1,32 @@
+{% extends '@Shop/base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <h2>Attribute List</h2>
+        <a href="{{ path('create_attribute') }}" class="btn btn-info" role="button">Add Attribute</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Label</th>
+                <th>Type</th>
+                <th>Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if attributes is not null %}
+                {% for attribute in attributes %}
+                    <tr>
+                        <td>{{ attribute.id }}</td>
+                        <td>{{ attribute.name }}</td>
+                        <td>{{ attribute.label}}</td>
+                        <td>{{ attribute.type }}</td>
+                        <td>{{ attribute.category.name }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

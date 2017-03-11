@@ -34,4 +34,14 @@ class ManufactureQueryService
             return [$manufacture->getId() => $manufacture->getName()];
         }, $manufactures);
     }
+
+    /**
+     * @param $id
+     *
+     * @return Manufacture
+     */
+    public function getManufacture($id)
+    {
+        return $this->manufactureRepository->finsOneById($id);
+    }
 }

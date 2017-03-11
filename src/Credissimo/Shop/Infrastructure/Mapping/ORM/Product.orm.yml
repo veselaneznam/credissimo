@@ -1,7 +1,6 @@
 Credissimo\Shop\Domain\Model\Product:
     repositoryClass: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineProductRepository
     type: entity
-    table: product
     id:
         id:
             type: integer
@@ -23,32 +22,42 @@ Credissimo\Shop\Domain\Model\Product:
             type: datetime
         price:
             type: decimal
-        createdAt:
-            type: datetime
-        updatedAt:
-            type: datetime
+            nullable: false
+            precision: 10
+            scale: 0
+        status:
+            type: smallint
             nullable: true
-
-    OneToMany:
-        productImages:
-            targetEntity: ProductImages
-            mappedBy: product
-    ManyToOne:
+            length: 1
+    manyToOne:
         category:
-            targetEntity: Category
-            inversedBy: products
-            joinColumn:
-                name: category_id
-                referencedColumnName: id
+            targetEntity: Credissimo\Shop\Domain\Model\Category
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                category_id:
+                    referencedColumnName: id
+            orphanRemoval: false
         manufacture:
-            targetEntity: Manufacture
-            inversedBy: products
-            joinColumn:
-                name: manufacture_id
-                referencedColumnName: id
+            targetEntity: Credissimo\Shop\Domain\Model\Manufacture
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                manufacture_id:
+                    referencedColumnName: id
+            orphanRemoval: false
         user:
-            targetEntity: User
-            inversedBy: products
-            joinColumn:
-                name: user_id
-                referencedColumnName: id
+            targetEntity: Credissimo\User\Domain\Model\User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

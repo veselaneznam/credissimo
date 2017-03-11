@@ -6,7 +6,7 @@ class Slug
 {
     const CHARACTER = '-';
 
-    public function __construct($string)
+    public static function transform($string)
     {
         $string = trim(strtolower($string));
 

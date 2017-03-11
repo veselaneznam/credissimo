@@ -1,12 +1,11 @@
 Credissimo\User\Domain\Model\User:
     repositoryClass: Credissimo\User\Infrastructure\Repository\Doctrine\ORM\DoctrineUserRepository
     type: entity
-    table: user
     id:
         id:
             type: integer
             generator: { strategy: AUTO }
     OneToMany:
         products:
-            targetEntity: Product
+            targetEntity: Credissimo\Shop\Domain\Model\Product
             mappedBy: product

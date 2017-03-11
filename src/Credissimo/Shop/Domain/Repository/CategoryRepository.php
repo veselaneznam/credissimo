@@ -13,4 +13,21 @@ interface CategoryRepository
      * @return Category
      */
     public function findOneByManufacture(Manufacture $manufacture);
+
+    /**
+     * @return Category[]
+     */
+    public function findAll();
+
+    /**
+     * @param $id
+     *
+     * @return Category
+     */
+    public function finsOneById($id);
+
+    /**
+     * @param Category $category
+     */
+    public function save($category);
 }

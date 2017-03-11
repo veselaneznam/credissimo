@@ -1,0 +1,16 @@
+{% extends '@Shop/base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>{{ title }}</h3>
+                {{ form_start(form) }}
+
+                {{ form_widget(form) }}
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+                <a href="{{ backUrl }}" class="btn btn-info" role="button">Back</a>
+                {{ form_end(form) }}
+            </div></div></div>
+{% endblock %}

@@ -16,12 +16,6 @@ class ProductImage
     /** @var Product */
     private $product;
 
-    /** @var \DateTime */
-    private $createdAt;
-
-    /** @var \DateTime */
-    private $updatedAt;
-
     /**
      * @param string    $src
      * @param string    $title
@@ -64,21 +58,5 @@ class ProductImage
     public function getProduct()
     {
         return $this->product;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

@@ -32,13 +32,13 @@ framework:
     fragments:       ~
     http_method_override: true
     assets: ~
-    php_errors:
-        log: true
 
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - bootstrap_3_layout.html.twig
 
 # Doctrine Configuration
 doctrine:
@@ -68,14 +68,14 @@ doctrine:
                         type:      yml
                         dir:       %kernel.root_dir%/../src/Credissimo/User/Infrastructure/Mapping/ORM
                         prefix:    Credissimo\User\Domain\Model
-                        alias:     MainBundle
+                        alias:     ShopBundle
                         is_bundle: false
 
                     shop:
                         type:      yml
                         dir:       %kernel.root_dir%/../src/Credissimo/Shop/Infrastructure/Mapping/ORM
                         prefix:    Credissimo\Shop\Domain\Model
-                        alias:     MainBundle
+                        alias:     ShopBundle
                         is_bundle: false
 
 # Swiftmailer Configuration

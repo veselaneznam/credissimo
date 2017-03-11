@@ -2,6 +2,8 @@
 
 namespace Credissimo\Shop\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Manufacture
 {
     /** @var int */
@@ -16,12 +18,6 @@ class Manufacture
     /** @var Category */
     private $category;
 
-    /** @var \DateTime */
-    private $createdAt;
-
-    /** @var \DateTime */
-    private $updatedAt;
-
     /**
      * @param string    $name
      * @param Product[] $products
@@ -30,7 +26,7 @@ class Manufacture
     public function __construct ($name, array $products, Category $category)
     {
         $this->name = $name;
-        $this->products = $products;
+        $this->products = new ArrayCollection($products);
         $this->category = $category;
     }
 
@@ -64,21 +60,5 @@ class Manufacture
     public function getCategory()
     {
         return $this->category;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

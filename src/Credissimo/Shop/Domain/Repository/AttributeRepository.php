@@ -13,4 +13,14 @@ interface AttributeRepository
      * @return Attribute
      */
     public function findAllByCategory(Category $category);
+
+    /**
+     * @param Attribute $attribute
+     */
+    public function save(Attribute $attribute);
+
+    /**
+     * @return Attribute[]
+     */
+    public function findAll();
 }

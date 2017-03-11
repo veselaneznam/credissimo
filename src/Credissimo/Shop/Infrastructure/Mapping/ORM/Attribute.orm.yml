@@ -1,12 +1,10 @@
 Credissimo\Shop\Domain\Model\Attribute:
     repositoryClass: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineAttributeRepository
     type: entity
-    table: attribute
     id:
         id:
             type: integer
             generator: { strategy: AUTO }
-
     fields:
         name:
             type: string
@@ -18,16 +16,17 @@ Credissimo\Shop\Domain\Model\Attribute:
             length: 255
         type:
             type: smallint
-        createdAt:
-            type: datetime
-        updatedAt:
-            type: datetime
-            nullable: true
+            nullable: false
 
-    ManyToOne:
+    manyToOne:
         category:
-            targetEntity: Category
-            inversedBy: attributes
-            joinColumn:
-                name: category_id
-                referencedColumnName: id
+            targetEntity: Credissimo\Shop\Domain\Model\Category
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                category_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

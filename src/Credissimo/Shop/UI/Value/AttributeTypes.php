@@ -30,4 +30,13 @@ class AttributeTypes
         self::PERCENT_TYPE => PercentType::class,
     ];
 
+    const TO_STRING = [
+        self::CHOICE_TYPE => 'ChoiceType',
+        self::DATETIME_TYPE => 'DateTimeType',
+        self::TEXT_TYPE => 'TextType',
+        self::RADIO_TYPE => 'RadioType',
+        self::TEXTAREA_TYPE => 'TextareaType',
+        self::URL_TYPE => 'UrlType',
+        self::PERCENT_TYPE => 'PercentType',
+    ];
 }

@@ -1,0 +1,28 @@
+{% extends '@Shop/base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <h2>Manufacture List</h2>
+        <a href="{{ path('create_manufacture') }}" class="btn btn-info" role="button">Add Manufacture</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if manufactures is not null %}
+                {% for manufacture in manufactures %}
+                    <tr>
+                        <td>{{ manufacture.id }}</td>
+                        <td>{{ manufacture.name }}</td>
+                        <td>{{ manufacture.category.name }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

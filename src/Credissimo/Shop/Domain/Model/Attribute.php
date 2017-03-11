@@ -2,7 +2,7 @@
 
 namespace Credissimo\Shop\Domain\Model;
 
-use Credissimo\Shop\Domain\Value\AttributeTypes;
+use Credissimo\Shop\Domain\Value\AttributeType;
 
 class Attribute
 {
@@ -15,7 +15,7 @@ class Attribute
     /** @var string */
     private $label;
 
-    /** @var AttributeTypes */
+    /** @var int*/
     private $type;
 
     /** @var Category */
@@ -28,16 +28,16 @@ class Attribute
     private $updatedAt;
 
     /**
-     * @param string         $name
-     * @param string         $label
-     * @param AttributeTypes $type
-     * @param Category       $category
+     * @param string        $name
+     * @param string        $label
+     * @param AttributeType $type
+     * @param Category      $category
      */
-    public function __construct($name, $label, AttributeTypes $type, Category $category)
+    public function __construct($name, $label, AttributeType $type, Category $category)
     {
         $this->name = $name;
         $this->label = $label;
-        $this->type = $type;
+        $this->type = $type->getType();
         $this->category = $category;
     }
 
@@ -70,7 +70,7 @@ class Attribute
      */
     public function getType()
     {
-        return $this->type->getId();
+        return $this->type;
     }
 
     /**

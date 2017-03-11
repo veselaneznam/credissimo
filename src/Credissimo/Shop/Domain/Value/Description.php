@@ -58,6 +58,6 @@ class Description implements \Serializable
      */
     public function getDescription()
     {
-        return $this->description;
+        return unserialize($this->description);
     }
 }

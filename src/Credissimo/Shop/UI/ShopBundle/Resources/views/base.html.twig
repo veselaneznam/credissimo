@@ -27,19 +27,20 @@
             {% endfor %}
             {% if is_granted("ROLE_SUPER_ADMIN") %}
                 <div class="btn-group btn-group-justified">
-                <a href="/product/add" class="btn btn-primary">Add Product</a>
-                <a href="/logout" class="btn btn-primary">LogOut</a>
+                <a href="{{ path('homepage') }}" class="btn btn-primary">Product List</a>
+                <a href="{{ path('attribute_list') }}" class="btn btn-primary">Attributes List</a>
+                <a href="{{ path('manufacture_list') }}" class="btn btn-primary">Manufacture List</a>
+                <a href="{{ path('category_list') }}" class="btn btn-primary">Category List</a>
+                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-primary">LogOut</a>
             </div>
-                {% else %}
-                    <div class="btn-group btn-group-justified">
-                        <a href="/login" class="btn btn-primary">LogIn</a>
-                    </div>
             {% endif %}
             <br/>
-            {% block content %}
-                {% endblock %}
+
         {% endblock %}
+        {#{% block content %}#}
+        {#{% endblock %}#}
     </div>
+
 </div>
 {% block javascripts %}
     <script src="{{ asset('js/jquery.js') }}"></script>

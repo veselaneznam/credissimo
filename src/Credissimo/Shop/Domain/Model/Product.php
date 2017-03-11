@@ -3,8 +3,10 @@
 namespace Credissimo\Shop\Domain\Model;
 
 use Credissimo\Shop\Domain\Value\Description;
+use Credissimo\Shop\Domain\Value\ProductStatuses;
 use Credissimo\Shop\Domain\Value\Slug;
 use Credissimo\User\Domain\Model\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Product
 {
@@ -26,12 +28,6 @@ class Product
     /** @var Category */
     private $category;
 
-    /** @var \DateTime */
-    private $createdAt;
-
-    /** @var \DateTime */
-    private $updatedAt;
-
     /** @var Manufacture */
     private $manufacture;
 
@@ -48,8 +44,13 @@ class Product
     private $user;
 
     /**
+     * @var bool
+     */
+    private $status;
+
+    /**
      * @param string         $name
-     * @param Slug           $slug
+     * @param string         $slug
      * @param Description    $description
      * @param ProductImage[] $productImages
      * @param Category       $category
@@ -61,7 +62,7 @@ class Product
      */
     public function __construct(
         $name,
-        Slug $slug,
+        $slug,
         Description $description,
         array $productImages,
         Category $category,
@@ -72,15 +73,16 @@ class Product
         User $user
     ) {
         $this->name = $name;
-        $this->slug = $slug;
-        $this->description = $description;
-        $this->productImages = $productImages;
+        $this->slug = Slug::transform($slug);
+        $this->description = $description->serialize();
+        $this->productImages = new ArrayCollection($productImages);
         $this->category = $category;
         $this->manufacture = $manufacture;
         $this->model = $model;
         $this->yearOfManufacture = $yearOfManufacture;
         $this->price = $price;
         $this->user = $user;
+        $this->status = ProductStatuses::ACTIVE;
     }
 
     /**
@@ -108,11 +110,11 @@ class Product
     }
 
     /**
-     * @return Description
+     * @return mixed[]
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->description->getDescription();
     }
 
     /**
@@ -137,22 +139,6 @@ class Product
     public function getManufacture()
     {
         return $this->manufacture;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 
     /**
@@ -185,5 +171,22 @@ class Product
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return Product
+     */
+    public function setToDeleted()
+    {
+        $this->status = ProductStatuses::DELETED;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

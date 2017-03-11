@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
-class AttributeTypes
+class AttributeTypeCollection
 {
     const CHOICE_TYPE = 1;
     const DATETIME_TYPE = 2;
@@ -30,4 +30,13 @@ class AttributeTypes
         self::PERCENT_TYPE => PercentType::class,
     ];
 
+    const ALL = [
+    self::CHOICE_TYPE ,
+    self::DATETIME_TYPE,
+    self::TEXT_TYPE,
+    self::RADIO_TYPE,
+    self::TEXTAREA_TYPE,
+    self::URL_TYPE,
+    self::PERCENT_TYPE,
+    ];
 }

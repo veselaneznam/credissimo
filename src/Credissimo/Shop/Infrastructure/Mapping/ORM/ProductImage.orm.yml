@@ -1,12 +1,10 @@
 Credissimo\Shop\Domain\Model\ProductImage:
     repositoryClass: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineProductImageRepository
     type: entity
-    table: product_image
     id:
         id:
             type: integer
             generator: { strategy: AUTO }
-
     fields:
         src:
             type: string
@@ -14,16 +12,17 @@ Credissimo\Shop\Domain\Model\ProductImage:
         title:
             type: string
             length: 255
-        createdAt:
-            type: datetime
-        updatedAt:
-            type: datetime
-            nullable: true
-
-    ManyToOne:
+            options:
+                fixed: false
+    manyToOne:
         product:
-            targetEntity: Product
-            inversedBy: productImages
-            joinColumn:
-                name: product_id
-                referencedColumnName: id
+            targetEntity: Credissimo\Shop\Domain\Model\Product
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                product_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,7 +1,9 @@
 {% extends '@Shop/base.html.twig' %}
-{% block content %}
+{% block body %}
+    {{ parent() }}
     <div class="container">
         <h2>Product List</h2>
+        <a href="{{ path('create_product') }}" class="btn btn-info" role="button">Add Product</a>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -12,6 +14,7 @@
                 <th>Year of Manufacture</th>
                 <th>Category</th>
                 <th>Price</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -25,10 +28,42 @@
                         <td>{{ product.yearOfManufacture | date }}</td>
                         <td>{{ product.category.name }}</td>
                         <td>{{ product.price |number_format(2, '.', ',') }}</td>
+                        <td>
+                            <a href="{{ path('edit_product', { 'id': product.id }) }}" class="btn btn-success" role="button">Edit</a>
+                            <a href="{{ path('delete_product', { 'id': product.id }) }}" class="btn delete btn-danger" role="button">Delete</a>
+                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}
             </tbody>
         </table>
     </div>
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                $(".delete").click(function($this){
+
+                    bootbox.confirm("Are you sure?", function(result) {
+                        var url = $this.val();
+                        alert(url);
+                        if(result){
+                            $.ajax({
+                                url: url,
+                                type: 'delete',
+                                success: function(result) {
+                                    console.log('Delete');
+                                },
+                                error: function(e){
+                                    console.log(e.responseText);
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    {% endblock %}
+
 {% endblock %}

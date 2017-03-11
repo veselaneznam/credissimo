@@ -6,6 +6,7 @@ use Credissimo\Shop\Domain\Model\Category;
 use Credissimo\Shop\Domain\Model\Manufacture;
 use Credissimo\Shop\Domain\Model\Product;
 use Credissimo\Shop\Domain\Repository\ProductRepository;
+use Credissimo\Shop\Domain\Value\ProductStatuses;
 use Credissimo\User\Domain\Model\User;
 use Doctrine\ORM\EntityRepository;
 
@@ -17,7 +18,7 @@ class DoctrineProductRepository extends EntityRepository implements ProductRepos
      */
     public function findAll()
     {
-        return parent::findAll();
+        return parent::findBy(['status' => ProductStatuses::ACTIVE]);
     }
 
     /**
@@ -25,7 +26,7 @@ class DoctrineProductRepository extends EntityRepository implements ProductRepos
      */
     public function findByUser(User $user)
     {
-        return parent::findBy(['user' => $user]);
+        return parent::findBy(['user' => $user, 'status' => ProductStatuses::ACTIVE]);
     }
 
     /**
@@ -33,7 +34,7 @@ class DoctrineProductRepository extends EntityRepository implements ProductRepos
      */
     public function findByCategory(Category $category)
     {
-        return parent::findBy(['category' => $category]);
+        return parent::findBy(['category' => $category, 'status' => ProductStatuses::ACTIVE]);
     }
 
     /**
@@ -41,7 +42,7 @@ class DoctrineProductRepository extends EntityRepository implements ProductRepos
      */
     public function findByManufacture(Manufacture $manufacture)
     {
-        return parent::findBy(['manufacture' => $manufacture]);
+        return parent::findBy(['manufacture' => $manufacture, 'status' => ProductStatuses::ACTIVE]);
     }
 
     /**
@@ -57,6 +58,16 @@ class DoctrineProductRepository extends EntityRepository implements ProductRepos
      */
     public function save(Product $product)
     {
+        $this->getEntityManager()->persist($product);
+        $this->getEntityManager()->flush($product);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(Product $product)
+    {
+        $product->setToDeleted();
         $this->getEntityManager()->persist($product);
         $this->getEntityManager()->flush($product);
     }

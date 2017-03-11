@@ -51,19 +51,21 @@ class ProductRepresentation
     /** @var User */
     private $user;
 
-    public function __construct(Product $product)
+    public function __construct(Product $product = null)
     {
-        $this->id = $product->getId();
-        $this->name = $product->getName();
-        $this->slug = $product->getSlug();
-        $this->description = $product->getDescription();
-        $this->productImages = $product->getProductImages();
-        $this->category = $product->getCategory();
-        $this->manufacture = $product->getManufacture();
-        $this->model = $product->getModel();
-        $this->yearOfManufacture = $product->getYearOfManufacture();
-        $this->price = $product->getPrice();
-        $this->user = $product->getUser();
+        if (null !== $product) {
+            $this->id = $product->getId();
+            $this->name = $product->getName();
+            $this->slug = $product->getSlug();
+            $this->description = $product->getDescription();
+            $this->productImages = $product->getProductImages();
+            $this->category = $product->getCategory();
+            $this->manufacture = $product->getManufacture();
+            $this->model = $product->getModel();
+            $this->yearOfManufacture = $product->getYearOfManufacture();
+            $this->price = $product->getPrice();
+            $this->user = $product->getUser();
+        }
     }
 
     /**
@@ -91,11 +93,11 @@ class ProductRepresentation
     }
 
     /**
-     * @return Description
+     * @return string
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->description->getDescription();
     }
 
     /**

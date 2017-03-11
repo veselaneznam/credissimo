@@ -1,7 +1,6 @@
 Credissimo\Shop\Domain\Model\Category:
     repositoryClass: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineCategoryRepository
     type: entity
-    table: category
     id:
         id:
             type: integer
@@ -13,18 +12,3 @@ Credissimo\Shop\Domain\Model\Category:
             length: 32
             unique: true
             nullable: false
-        createdAt:
-            type: datetime
-        updatedAt:
-            type: datetime
-            nullable: true
-    OneToMany:
-        products:
-            targetEntity: Product
-            mappedBy: category
-        attributes:
-            targetEntity: Attribute
-            mappedBy: category
-        manufactures:
-            targetEntity: Manufacture
-            mappedBy: category

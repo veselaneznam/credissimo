@@ -1,7 +1,6 @@
 Credissimo\Shop\Domain\Model\Manufacture:
     repositoryClass: Credissimo\Shop\Infrastructure\Repository\Doctrine\ORM\DoctrineManufactureRepository
     type: entity
-    table: manufacture
     id:
         id:
             type: integer
@@ -11,21 +10,16 @@ Credissimo\Shop\Domain\Model\Manufacture:
         name:
             type: string
             length: 32
-            unique: true
-            nullable: false
-        createdAt:
-            type: datetime
-        updatedAt:
-            type: datetime
-            nullable: true
-    OneToMany:
-        products:
-            targetEntity: Product
-            mappedBy: manufacture
-    ManyToOne:
+
+    manyToOne:
         category:
-            targetEntity: Category
-            inversedBy: manufactures
-            joinColumn:
-                name: category_id
-                referencedColumnName: id
+            targetEntity: Credissimo\Shop\Domain\Model\Category
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                category_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
