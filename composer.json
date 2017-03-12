@@ -2,6 +2,14 @@
     "name": "vferdinandova/credisimo",
     "license": "proprietary",
     "type": "project",
+    "description" : "A demo bundle",
+    "authors" : [{
+        "name" : "Vesela Ferdinandova",
+        "email" : "vesela.ferdinandova@gmail.com"
+    }],
+    "keywords" : [
+        "Basic product CRUD"
+    ],
     "autoload": {
         "psr-4": {
             "Credissimo\\": "src/Credissimo/"
