@@ -5,7 +5,6 @@ namespace Credissimo\Shop\UI\ShopBundle\Controller;
 use Credissimo\Shop\Application\Manufacture\CreateNewManufactureCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -42,8 +41,7 @@ class ManufactureController extends Controller
 
         $form = $this->createFormBuilder();
         $form->add('name', TextType::class)
-            ->add('category', ChoiceType::class, ['choices' => $categoryQueryService->getCategoriesAsOptionList()])
-            ->add('Save', SubmitType::class);
+            ->add('category', ChoiceType::class, ['choices' => $categoryQueryService->getCategoriesAsOptionList()]);
 
         $form = $form->getForm();
         $form->handleRequest($request);
@@ -57,7 +55,7 @@ class ManufactureController extends Controller
         return $this->render('@Shop/entity.html.twig', array(
             'form' => $form->createView(),
             'title' => 'New Manufacture',
-            'backUrl' => '/manufacture'
+            'backUrl' => '/admin/manufacture'
         ));
     }
 

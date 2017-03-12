@@ -2,7 +2,7 @@
 
 namespace Credissimo\Shop\Application\Manufacture;
 
-use Credissimo\Shop\Domain\Model\Category;
+use Credissimo\Shop\Application\Category\CategoryRepresentation;
 
 class CreateNewManufactureCommand
 {
@@ -10,17 +10,17 @@ class CreateNewManufactureCommand
     public $name;
 
     /**
-     * @var Category
+     * @var CategoryRepresentation
      */
     public $category;
 
     /**
      * @param          $name
-     * @param Category $category
+     * @param CategoryRepresentation $category
      */
     public function __construct(
         $name,
-        Category $category
+        CategoryRepresentation $category
     ) {
         $this->name = $name;
         $this->category = $category;

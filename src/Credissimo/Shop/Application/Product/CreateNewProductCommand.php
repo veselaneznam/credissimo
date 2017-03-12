@@ -2,6 +2,7 @@
 
 namespace Credissimo\Shop\Application\Product;
 
+use Credissimo\Shop\Application\Manufacture\ManufactureRepresentation;
 use Credissimo\Shop\Domain\Model\Category;
 use Credissimo\Shop\Domain\Model\Manufacture;
 use Credissimo\Shop\Domain\Model\ProductImage;
@@ -47,32 +48,34 @@ class CreateNewProductCommand
     /** @var User */
     public $user;
 
+    /** @var array */
+    public $productFormData;
+
+    /** @var array */
+    public $attributes;
+
     public function __construct(
-        $name,
-        $slug,
-        Description $description,
-        array $productImages = null,
-        Manufacture $manufacture,
-        $model,
-        \DateTime $yearOfManufacture,
-        $price,
+        array $productFormData,
+        ManufactureRepresentation $manufacture,
+        $attributes,
         User $user
     ) {
         if (null === $manufacture) {
             throw new \Exception('Manufacture is not valid');
         }
 
-        $this->name = $name;
-        $this->slug = $slug;
-        $this->manufacture = $manufacture;
+        $this->name = $productFormData['name'];
+        $this->slug = $productFormData['slug'];
+        $this->manufacture = $manufacture->convertToDomain();
 
-        $this->description = $description;
         $this->productImages = [];
         $this->category = $this->manufacture->getCategory();
 
-        $this->model = $model;
-        $this->yearOfManufacture = $yearOfManufacture;
-        $this->price = $price;
+        $this->model = $productFormData['model'];
+        $this->yearOfManufacture = $productFormData['yearOfManufacture'];
+        $this->price = $productFormData['price'];
         $this->user = $user;
+        $this->productFormData = $productFormData;
+        $this->attributes = $attributes;
     }
 }

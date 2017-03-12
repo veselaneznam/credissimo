@@ -4,8 +4,6 @@ namespace Credissimo\Shop\UI\ShopBundle\Form;
 
 use Credissimo\Shop\Application\Attribute\AttributeRepresentation;
 use Credissimo\Shop\Application\Product\ProductRepresentation;
-use Credissimo\Shop\Domain\Model\Attribute;
-use Credissimo\Shop\Domain\Model\Manufacture;
 use Credissimo\Shop\UI\Value\AttributeTypes;
 use Credissimo\Shop\UI\Value\AttributeValue;
 use Credissimo\Shop\UI\Value\ProductStatus;
@@ -18,10 +16,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ProductType extends AbstractType
 {
-    /** @var Manufacture[] */
+    /** @var array */
     private $manufactures;
 
-    /** @var Attribute[]|null */
+    /** @var AttributeRepresentation[]|null */
     private $attributes;
 
     /** @var ProductRepresentation */
@@ -80,7 +78,7 @@ class ProductType extends AbstractType
         if (null !== $this->attributes && null !== $this->productRepresentation) {
             $attributeValues = [];
             foreach ($this->attributes as $attribute) {
-                $attributeValues[] = new AttributeValue(new AttributeRepresentation($attribute), null);
+                $attributeValues[] = new AttributeValue($attribute, null);
             }
 
             $dataAttributes = unserialize($this->productRepresentation->getDescription());

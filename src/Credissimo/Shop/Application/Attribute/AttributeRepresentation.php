@@ -4,6 +4,7 @@ namespace Credissimo\Shop\Application\Attribute;
 
 use Credissimo\Shop\Domain\Model\Attribute;
 use Credissimo\Shop\Domain\Model\Category;
+use Credissimo\Shop\UI\Value\AttributeTypes;
 
 class AttributeRepresentation
 {
@@ -22,6 +23,9 @@ class AttributeRepresentation
     /** @var Category */
     private $category;
 
+    /** @var Attribute */
+    private $attribute;
+
     /**
      * @param Attribute $attribute
      */
@@ -32,6 +36,7 @@ class AttributeRepresentation
         $this->label = $attribute->getLabel();
         $this->type = $attribute->getType();
         $this->category = $attribute->getCategory();
+        $this->attribute = $attribute;
     }
 
     /**
@@ -72,5 +77,21 @@ class AttributeRepresentation
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeAsString()
+    {
+        return AttributeTypes::TO_STRING[$this->type];
+    }
+
+    /**
+     * @return Attribute
+     */
+    public function convertToDomain()
+    {
+        return $this->attribute;
     }
 }

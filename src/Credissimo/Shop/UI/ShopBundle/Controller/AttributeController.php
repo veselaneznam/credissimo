@@ -5,7 +5,6 @@ namespace Credissimo\Shop\UI\ShopBundle\Controller;
 use Credissimo\Shop\Application\Attribute\CreateNewAttributeCommand;
 use Credissimo\Shop\UI\ShopBundle\Form\AttributeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,7 +53,7 @@ class AttributeController extends Controller
         return $this->render('@Shop/entity.html.twig', array(
             'form' => $form->createView(),
             'title' => 'New Attribute',
-            'backUrl' => '/attribute'
+            'backUrl' => '/admin/attribute'
         ));
     }
 

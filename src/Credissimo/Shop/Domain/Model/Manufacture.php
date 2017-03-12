@@ -2,8 +2,6 @@
 
 namespace Credissimo\Shop\Domain\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 class Manufacture
 {
     /** @var int */
@@ -12,21 +10,16 @@ class Manufacture
     /** @var string */
     private $name;
 
-    /** @var Product[] */
-    private $products;
-
     /** @var Category */
     private $category;
 
     /**
      * @param string    $name
-     * @param Product[] $products
      * @param Category  $category
      */
-    public function __construct ($name, array $products, Category $category)
+    public function __construct ($name, Category $category)
     {
         $this->name = $name;
-        $this->products = new ArrayCollection($products);
         $this->category = $category;
     }
 
@@ -44,14 +37,6 @@ class Manufacture
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return Product[]
-     */
-    public function getProducts()
-    {
-        return $this->products;
     }
 
     /**

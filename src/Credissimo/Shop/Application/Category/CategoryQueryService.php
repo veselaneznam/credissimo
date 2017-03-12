@@ -10,6 +10,9 @@ class CategoryQueryService
     /** @var CategoryRepository */
     private $categoryRepository;
 
+    /**
+     * @param CategoryRepository $categoryRepository
+     */
     public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
@@ -30,18 +33,32 @@ class CategoryQueryService
     /**
      * @param $id
      *
-     * @return Category
+     * @return CategoryRepresentation
      */
     public function getCategory($id)
     {
-        return $this->categoryRepository->finsOneById($id);
+        return new CategoryRepresentation($this->categoryRepository->finsOneById($id));
     }
 
     /**
-     * @return Category[]
+     * @return CategoryRepresentation[]
      */
     public function getCategories()
     {
-        return $this->categoryRepository->findAll();
+        return $this->convertToRepresentation($this->categoryRepository->findAll());
+    }
+
+    /**
+     * @param $categories
+     *
+     * @return CategoryRepresentation[]
+     */
+    protected function convertToRepresentation($categories)
+    {
+        return array_map(function (Category $categories) {
+            return new CategoryRepresentation($categories);
+        },
+            $categories
+        );
     }
 }

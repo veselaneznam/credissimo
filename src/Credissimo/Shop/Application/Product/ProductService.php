@@ -2,7 +2,7 @@
 
 namespace Credissimo\Shop\Application\Product;
 
-use Credissimo\Shop\Domain\Model\Attribute;
+use Credissimo\Shop\Application\Attribute\AttributeRepresentation;
 use Credissimo\Shop\Domain\Model\Product;
 use Credissimo\Shop\Domain\Repository\ProductRepository;
 use Credissimo\Shop\Domain\Value\Description;
@@ -20,10 +20,11 @@ class ProductService
 
     public function create(CreateNewProductCommand $command)
     {
+        $description = $this->transformToDescription($command->attributes, $command->productFormData);
         $product = new Product(
             $command->name,
             $command->slug,
-            $command->description,
+            $description,
             $command->productImages,
             $command->category,
             $command->manufacture,
@@ -47,7 +48,7 @@ class ProductService
             $command->productRepresentation->getDescription(),
             $command->productRepresentation->getProductImages(),
             $command->productRepresentation->getCategory(),
-            $command->productRepresentation->getManufacture(),
+            $command->productRepresentation->getManufacture()->convertToDomain(),
             $command->productRepresentation->getModel(),
             $command->productRepresentation->getYearOfManufacture(),
             $command->productRepresentation->getPrice(),
@@ -62,7 +63,7 @@ class ProductService
     }
 
     /**
-     * @param Attribute[] $attributes
+     * @param AttributeRepresentation[] $attributes
      * @param mixed       $data
      *
      * @return Description

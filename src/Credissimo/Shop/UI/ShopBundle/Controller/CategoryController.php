@@ -5,7 +5,6 @@ namespace Credissimo\Shop\UI\ShopBundle\Controller;
 use Credissimo\Shop\Application\Category\CreateCategoryCommand;
 use Credissimo\Shop\UI\ShopBundle\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +38,6 @@ class CategoryController extends Controller
     public function addAction(Request $request)
     {
         $form = $this->createForm(new CategoryType());
-        $form->add("Save", SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,10 +50,13 @@ class CategoryController extends Controller
         return $this->render('@Shop/entity.html.twig', array(
             'form' => $form->createView(),
             'title' => 'New Category',
-            'backUrl' => '/category'
+            'backUrl' => '/admin/category'
         ));
     }
 
+    /**
+     * @param $form
+     */
     private function createCategory($form)
     {
         $categoryService = $this->get('credissimo.category_service');

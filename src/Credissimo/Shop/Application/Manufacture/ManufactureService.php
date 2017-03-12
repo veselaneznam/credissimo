@@ -21,7 +21,7 @@ class ManufactureService
 
     public function create(CreateNewManufactureCommand $command)
     {
-        $manufacture = new Manufacture($command->name, [], $command->category);
+        $manufacture = new Manufacture($command->name, $command->category->convertToDomain());
         $this->manufactureRepository->save($manufacture);
     }
 }

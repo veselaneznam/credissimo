@@ -236,18 +236,12 @@ class ProductController extends Controller
         $attributeQueryService = $this->get('credissimo.attribute_query_service');
         $manufacture = $manufactureService->getManufacture($productForm->get('manufacture')->getData());
         $productService = $this->get('credissimo.product_service');
-        $attributes = $attributeQueryService->getAttributesByCategory($manufacture->getCategory());
+        $attributes = $attributeQueryService->getAttributesByCategory($manufacture->convertToDomain()->getCategory());
 
-        $description = $productService->transformToDescription($attributes, $productForm->getData());
         $productCreate = new CreateNewProductCommand(
-            $productForm->get('name')->getData(),
-            $productForm->get('slug')->getData(),
-            $description,
-            [],
+            $productForm->getData(),
             $manufacture,
-            $productForm->get('model')->getData(),
-            $productForm->get('yearOfManufacture')->getData(),
-            $productForm->get('price')->getData(),
+            $attributes,
             $this->getUser()
         );
 

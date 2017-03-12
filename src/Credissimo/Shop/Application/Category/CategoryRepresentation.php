@@ -2,10 +2,7 @@
 
 namespace Credissimo\Shop\Application\Category;
 
-use Credissimo\Shop\Domain\Model\Attribute;
 use Credissimo\Shop\Domain\Model\Category;
-use Credissimo\Shop\Domain\Model\Manufacture;
-use Credissimo\Shop\Domain\Model\Product;
 
 class CategoryRepresentation
 {
@@ -15,14 +12,10 @@ class CategoryRepresentation
     /** @var string */
     private $name;
 
-    /** @var Product[] */
-    private $products;
-
-    /** @var Attribute[] */
-    private $attributes;
-
-    /** @var Manufacture[] */
-    private $manufactures;
+    /**
+     * @var Category
+     */
+    private $category;
 
     /**
      * @param Category $category
@@ -31,9 +24,7 @@ class CategoryRepresentation
     {
         $this->id = $category->getId();
         $this->name = $category->getName();
-        $this->products = $category->getProducts();
-        $this->attributes = $category->getAttributes();
-        $this->manufactures = $category->getManufactures();
+        $this->category = $category;
     }
 
     /**
@@ -53,26 +44,10 @@ class CategoryRepresentation
     }
 
     /**
-     * @return Product[]
+     * @return Category
      */
-    public function getProducts()
+    public function convertToDomain()
     {
-        return $this->products;
-    }
-
-    /**
-     * @return Attribute[]
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * @return Manufacture[]
-     */
-    public function getManufactures()
-    {
-        return $this->manufactures;
+       return $this->category;
     }
 }

@@ -16,11 +16,11 @@ class ManufactureQueryService
     }
 
     /**
-     * @return Manufacture[]
+     * @return ManufactureRepresentation[]
      */
     public function getManufactures()
     {
-        return $this->manufactureRepository->findAll();
+        return $this->convertToRepresentation($this->manufactureRepository->findAll());
     }
 
     /**
@@ -28,7 +28,7 @@ class ManufactureQueryService
      */
     public function getManufacturesAsOptionList()
     {
-        $manufactures = $this->getManufactures();
+        $manufactures = $this->manufactureRepository->findAll();
 
         return array_map(function (Manufacture $manufacture) {
             return [$manufacture->getId() => $manufacture->getName()];
@@ -38,10 +38,24 @@ class ManufactureQueryService
     /**
      * @param $id
      *
-     * @return Manufacture
+     * @return ManufactureRepresentation
      */
     public function getManufacture($id)
     {
-        return $this->manufactureRepository->finsOneById($id);
+        return new ManufactureRepresentation($this->manufactureRepository->finsOneById($id));
+    }
+
+    /**
+     * @param $manufactures
+     *
+     * @return ManufactureRepresentation[]
+     */
+    protected function convertToRepresentation($manufactures)
+    {
+        return array_map(function (Manufacture $manufacture) {
+            return new ManufactureRepresentation($manufacture);
+        },
+            $manufactures
+        );
     }
 }

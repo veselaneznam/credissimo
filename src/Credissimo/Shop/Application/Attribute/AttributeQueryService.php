@@ -20,20 +20,38 @@ class AttributeQueryService
     }
 
     /**
-     * @return Attribute[]
+     * @return AttributeRepresentation[]
      */
     public function getAttributes()
     {
-        return $this->attributeRepository->findAll();
+        $attributes = $this->attributeRepository->findAll();
+
+        return $this->convertToRepresentation($attributes);
     }
 
     /**
      * @param Category $category
      *
-     * @return Attribute
+     * @return AttributeRepresentation[]
      */
     public function getAttributesByCategory(Category $category)
     {
-        return $this->attributeRepository->findAllByCategory($category);
+        $attributes = $this->attributeRepository->findAllByCategory($category);
+
+        return $this->convertToRepresentation($attributes);
+    }
+
+    /**
+     * @param $attributes
+     *
+     * @return AttributeRepresentation[]
+     */
+    protected function convertToRepresentation($attributes)
+    {
+        return array_map(function (Attribute $attribute) {
+            return new AttributeRepresentation($attribute);
+        },
+            $attributes
+        );
     }
 }

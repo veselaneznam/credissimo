@@ -4,7 +4,6 @@ namespace Credissimo\Shop\Application\Manufacture;
 
 use Credissimo\Shop\Domain\Model\Category;
 use Credissimo\Shop\Domain\Model\Manufacture;
-use Credissimo\Shop\Domain\Model\Product;
 
 class ManufactureRepresentation
 {
@@ -14,18 +13,23 @@ class ManufactureRepresentation
     /** @var string */
     private $name;
 
-    /** @var Product[] */
-    private $products;
-
     /** @var Category */
     private $category;
 
+    /**
+     * @var Manufacture
+     */
+    private $manufacture;
+
+    /**
+     * @param Manufacture $manufacture
+     */
     public function __construct(Manufacture $manufacture)
     {
         $this->id = $manufacture->getId();
         $this->name = $manufacture->getName();
-        $this->products = $manufacture->getProducts();
         $this->category = $manufacture->getCategory();
+        $this->manufacture = $manufacture;
     }
 
     /**
@@ -45,18 +49,18 @@ class ManufactureRepresentation
     }
 
     /**
-     * @return Product[]
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    /**
      * @return Category
      */
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return Manufacture
+     */
+    public function convertToDomain()
+    {
+        return $this->manufacture;
     }
 }

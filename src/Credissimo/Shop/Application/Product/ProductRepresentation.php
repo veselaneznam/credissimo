@@ -2,6 +2,7 @@
 
 namespace Credissimo\Shop\Application\Product;
 
+use Credissimo\Shop\Application\Manufacture\ManufactureRepresentation;
 use Credissimo\Shop\Domain\Model\Category;
 use Credissimo\Shop\Domain\Model\Manufacture;
 use Credissimo\Shop\Domain\Model\Product;
@@ -31,7 +32,7 @@ class ProductRepresentation
     /** @var Category */
     private $category;
 
-    /** @var Manufacture */
+    /** @var ManufactureRepresentation */
     private $manufacture;
 
     /** @var string */
@@ -118,7 +119,7 @@ class ProductRepresentation
     }
 
     /**
-     * @return Manufacture
+     * @return ManufactureRepresentation
      */
     public function getManufacture()
     {

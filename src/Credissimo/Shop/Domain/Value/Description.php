@@ -32,7 +32,7 @@ class Description implements \Serializable
     {
         foreach ($this->attributes as $attribute) {
             if(!empty($this->data[$attribute->getName()])) {
-                $this->description[] = new AttributeValue($attribute, $this->data[$attribute->getName()]);
+                $this->description[] = new AttributeValue($attribute->convertToDomain(), $this->data[$attribute->getName()]);
             }
         }
     }

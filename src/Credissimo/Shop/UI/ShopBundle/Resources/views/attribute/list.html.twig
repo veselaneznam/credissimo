@@ -21,7 +21,7 @@
                         <td>{{ attribute.id }}</td>
                         <td>{{ attribute.name }}</td>
                         <td>{{ attribute.label}}</td>
-                        <td>{{ attribute.type }}</td>
+                        <td>{{ attribute.getTypeAsString()}}</td>
                         <td>{{ attribute.category.name }}</td>
                     </tr>
                 {% endfor %}
