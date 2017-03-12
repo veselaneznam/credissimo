@@ -12,7 +12,7 @@ interface ProductRepository
     /**
      * @return Product[]
      */
-    public function findAll();
+    public function findAllActive();
 
     /**
      * @param User $user
@@ -51,4 +51,18 @@ interface ProductRepository
      * @param Product $product
      */
     public function delete(Product $product);
+
+    public function update(Product $product);
+
+    /**
+     * @return Product[]
+     */
+    public function findAllDeleted();
+
+    /**
+     * @param array $data
+     *
+     * @return Product[]
+     */
+    public function findByCriteria(array $data);
 }

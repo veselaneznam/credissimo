@@ -92,3 +92,8 @@ fos_user:
     from_email:
         address: vesela.ferdinandova@gmail.com
         sender_name: Vesela
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations

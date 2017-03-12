@@ -8,6 +8,7 @@ use Credissimo\Shop\Domain\Model\Product;
 use Credissimo\Shop\Domain\Model\ProductImage;
 use Credissimo\Shop\Domain\Value\Description;
 use Credissimo\Shop\Domain\Value\Slug;
+use Credissimo\Shop\UI\Value\ProductStatus;
 use Credissimo\User\Domain\Model\User;
 
 class ProductRepresentation
@@ -30,12 +31,6 @@ class ProductRepresentation
     /** @var Category */
     private $category;
 
-    /** @var \DateTime */
-    private $createdAt;
-
-    /** @var \DateTime */
-    private $updatedAt;
-
     /** @var Manufacture */
     private $manufacture;
 
@@ -51,6 +46,11 @@ class ProductRepresentation
     /** @var User */
     private $user;
 
+    /**
+     * @var int
+     */
+    private $status;
+
     public function __construct(Product $product = null)
     {
         if (null !== $product) {
@@ -65,6 +65,7 @@ class ProductRepresentation
             $this->yearOfManufacture = $product->getYearOfManufacture();
             $this->price = $product->getPrice();
             $this->user = $product->getUser();
+            $this->status = $product->getStatus();
         }
     }
 
@@ -81,7 +82,7 @@ class ProductRepresentation
      */
     public function getName()
     {
-        return $this->name;
+        return isset($this->name) ? $this->name : null;
     }
 
     /**
@@ -89,15 +90,15 @@ class ProductRepresentation
      */
     public function getSlug()
     {
-        return $this->slug;
+        return isset($this->slug) ? $this->slug : null;
     }
 
     /**
-     * @return string
+     * @return Description
      */
     public function getDescription()
     {
-        return $this->description->getDescription();
+        return isset($this->description) ? $this->description : null;
     }
 
     /**
@@ -105,7 +106,7 @@ class ProductRepresentation
      */
     public function getProductImages()
     {
-        return $this->productImages;
+        return isset($this->productImages) ? $this->productImages : null;
     }
 
     /**
@@ -113,23 +114,7 @@ class ProductRepresentation
      */
     public function getCategory()
     {
-        return $this->category;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
+        return isset($this->category) ? $this->category : null;
     }
 
     /**
@@ -137,7 +122,7 @@ class ProductRepresentation
      */
     public function getManufacture()
     {
-        return $this->manufacture;
+        return isset($this->manufacture) ? $this->manufacture : null;
     }
 
     /**
@@ -145,7 +130,7 @@ class ProductRepresentation
      */
     public function getModel()
     {
-        return $this->model;
+        return isset($this->model) ? $this->model : null;
     }
 
     /**
@@ -153,7 +138,7 @@ class ProductRepresentation
      */
     public function getYearOfManufacture()
     {
-        return $this->yearOfManufacture;
+        return isset($this->yearOfManufacture) ? $this->yearOfManufacture : null;
     }
 
     /**
@@ -161,7 +146,7 @@ class ProductRepresentation
      */
     public function getPrice()
     {
-        return $this->price;
+        return isset($this->price) ? $this->price : null;
     }
 
     /**
@@ -170,5 +155,144 @@ class ProductRepresentation
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return isset($this->status) ? $this->status : ProductStatus::ACTIVE;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return ProductRepresentation
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return ProductRepresentation
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param Slug $slug
+     *
+     * @return ProductRepresentation
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * @param Description $description
+     *
+     * @return ProductRepresentation
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @param ProductImage[] $productImages
+     *
+     * @return ProductRepresentation
+     */
+    public function setProductImages($productImages)
+    {
+        $this->productImages = $productImages;
+
+        return $this;
+    }
+
+    /**
+     * @param Category $category
+     *
+     * @return ProductRepresentation
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @param Manufacture $manufacture
+     *
+     * @return ProductRepresentation
+     */
+    public function setManufacture($manufacture)
+    {
+        $this->manufacture = $manufacture;
+
+        return $this;
+    }
+
+    /**
+     * @param string $model
+     *
+     * @return ProductRepresentation
+     */
+    public function setModel($model)
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    /**
+     * @param \DateTime $yearOfManufacture
+     *
+     * @return ProductRepresentation
+     */
+    public function setYearOfManufacture(\DateTime $yearOfManufacture)
+    {
+        $this->yearOfManufacture = $yearOfManufacture;
+
+        return $this;
+    }
+
+    /**
+     * @param float $price
+     *
+     * @return ProductRepresentation
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @param int $status
+     *
+     * @return ProductRepresentation
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }

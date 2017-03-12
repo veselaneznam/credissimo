@@ -16,7 +16,7 @@ class DoctrineProductRepository extends EntityRepository implements ProductRepos
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function findAllActive()
     {
         return parent::findBy(['status' => ProductStatuses::ACTIVE]);
     }
@@ -70,5 +70,31 @@ class DoctrineProductRepository extends EntityRepository implements ProductRepos
         $product->setToDeleted();
         $this->getEntityManager()->persist($product);
         $this->getEntityManager()->flush($product);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function update(Product $product)
+    {
+        $this->getEntityManager()->merge($product);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @return Product[]
+     */
+    public function findAllDeleted()
+    {
+        return parent::findBy(['status' => ProductStatuses::DELETED]);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Product[]
+     */
+    public function findByCriteria(array $data)
+    {
+        return parent::findBy($data);
     }
 }

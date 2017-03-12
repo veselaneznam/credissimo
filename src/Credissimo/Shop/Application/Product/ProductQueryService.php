@@ -23,7 +23,7 @@ class ProductQueryService
      */
     public function getProducts()
     {
-        return $this->productRepository->findAll();
+        return $this->productRepository->findAllActive();
     }
 
     /**
@@ -34,5 +34,16 @@ class ProductQueryService
     public function getProduct($productId)
     {
         return $this->productRepository->findOneById($productId);
+    }
+
+    public function getDeletedProducts()
+    {
+        return $this->productRepository->findAllDeleted();
+    }
+
+    public function search($data)
+    {
+        $data = array_filter($data);
+        return $this->productRepository->findByCriteria($data);
     }
 }

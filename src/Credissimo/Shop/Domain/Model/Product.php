@@ -102,6 +102,17 @@ class Product
     }
 
     /**
+     * @param int $id
+     *
+     * @return Product
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * @return Slug
      */
     public function getSlug()
@@ -110,11 +121,11 @@ class Product
     }
 
     /**
-     * @return mixed[]
+     * @return Description
      */
     public function getDescription()
     {
-        return $this->description->getDescription();
+        return $this->description;
     }
 
     /**
@@ -182,6 +193,14 @@ class Product
         return $this;
     }
 
+    /**
+     * @return Product
+     */
+    public function setToActive()
+    {
+        $this->status = ProductStatuses::ACTIVE;
+        return $this;
+    }
     /**
      * @return int
      */

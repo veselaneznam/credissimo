@@ -6,6 +6,7 @@ use Credissimo\Shop\Domain\Model\Attribute;
 use Credissimo\Shop\Domain\Model\Product;
 use Credissimo\Shop\Domain\Repository\ProductRepository;
 use Credissimo\Shop\Domain\Value\Description;
+use Credissimo\Shop\UI\Value\ProductStatus;
 
 class ProductService
 {
@@ -36,6 +37,31 @@ class ProductService
     }
 
     /**
+     * @param UpdateProductCommand $command
+     */
+    public function update(UpdateProductCommand $command)
+    {
+        $product = new Product(
+            $command->productRepresentation->getName(),
+            $command->productRepresentation->getSlug(),
+            $command->productRepresentation->getDescription(),
+            $command->productRepresentation->getProductImages(),
+            $command->productRepresentation->getCategory(),
+            $command->productRepresentation->getManufacture(),
+            $command->productRepresentation->getModel(),
+            $command->productRepresentation->getYearOfManufacture(),
+            $command->productRepresentation->getPrice(),
+            $command->productRepresentation->getUser()
+        );
+        $product->setId($command->productRepresentation->getId());
+
+        if(ProductStatus::DELETED === $command->productRepresentation->getStatus()) {
+            $product->setToDeleted();
+        }
+        $this->productRepository->update($product);
+    }
+
+    /**
      * @param Attribute[] $attributes
      * @param mixed       $data
      *
@@ -52,5 +78,13 @@ class ProductService
     public function delete(DeleteProductCommand $command)
     {
         $this->productRepository->delete($command->product);
+    }
+
+    /**
+     * @param ActivateProductCommand $command
+     */
+    public function activate(ActivateProductCommand $command)
+    {
+        $this->productRepository->update($command->product);
     }
 }

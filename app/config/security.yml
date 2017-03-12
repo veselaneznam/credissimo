@@ -21,11 +21,11 @@ security:
             logout:       true
             anonymous:    true
             logout:
-                 path:   fos_user_security_logout
-                 default_target_path: login
+                 path:   logout
+                 default_target_path: homepage
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/logout, role: IS_FULLY_AUTHENTICATED }
+        - { path: ^/logout, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin$, role: ROLE_ADMIN }
         - { path: ^/product, role: ROLE_ADMIN }

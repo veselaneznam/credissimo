@@ -4,6 +4,7 @@ namespace Credissimo\Shop\UI\Value;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,6 +20,7 @@ class AttributeTypes
     const TEXTAREA_TYPE = 5;
     const URL_TYPE = 6;
     const PERCENT_TYPE = 7;
+    const NUMBER_TYPE = 8;
 
     const MAPPING = [
         self::CHOICE_TYPE => ChoiceType::class,
@@ -28,6 +30,7 @@ class AttributeTypes
         self::TEXTAREA_TYPE => TextareaType::class,
         self::URL_TYPE => UrlType::class,
         self::PERCENT_TYPE => PercentType::class,
+        self::NUMBER_TYPE => NumberType::class,
     ];
 
     const TO_STRING = [
@@ -38,5 +41,6 @@ class AttributeTypes
         self::TEXTAREA_TYPE => 'TextareaType',
         self::URL_TYPE => 'UrlType',
         self::PERCENT_TYPE => 'PercentType',
+        self::NUMBER_TYPE => 'NumberType',
     ];
 }

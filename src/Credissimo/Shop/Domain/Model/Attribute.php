@@ -21,12 +21,6 @@ class Attribute
     /** @var Category */
     private $category;
 
-    /** @var \DateTime */
-    private $createdAt;
-
-    /** @var \DateTime */
-    private $updatedAt;
-
     /**
      * @param string        $name
      * @param string        $label
@@ -71,22 +65,6 @@ class Attribute
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 
     /**

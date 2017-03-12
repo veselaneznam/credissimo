@@ -2,7 +2,7 @@
 
 namespace Credissimo\Shop\UI\Value;
 
-use Credissimo\Shop\Application\AttributeRepresentation;
+use Credissimo\Shop\Application\Attribute\AttributeRepresentation;
 
 class AttributeValue
 {

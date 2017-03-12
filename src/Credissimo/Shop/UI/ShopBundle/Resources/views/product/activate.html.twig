@@ -1,21 +1,20 @@
 {% extends '@Shop/base.html.twig' %}
 {% block body %}
     {{ parent() }}
-{{ form_start(delete_form) }}
+{{ form_start(activate_form) }}
 <div class="uk-modal-header">
-    <h3 class="uk-modal-title">Delete this Product?</h3>
+    <h3 class="uk-modal-title">Activate this Product?</h3>
 </div>
 <p>
-    Are you sure you want to delete  '{{ product.name }}'?<br/>
-    This cannot be undone.
+    Are you sure you want to activate '{{ product.name }}'?<br/>
 </p>
 <div class="uk-modal-footer uk-text-right">
     <div>
         <button type="submit" class="md-btn md-btn-danger" title="Click to proceed!">
-            <i class="uk-icon-trash"></i> Delete
+            <i class="uk-icon-trash"></i> Activate
         </button>
         <button type="reset" class="md-btn md-btn-warning uk-modal-close">Cancel</button>
     </div>
 </div>
-{{ form_end(delete_form) }}
+{{ form_end(activate_form) }}
 {% endblock %}

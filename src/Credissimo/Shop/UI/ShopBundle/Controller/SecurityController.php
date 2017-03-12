@@ -34,4 +34,15 @@ class SecurityController extends Controller
             'error'         => $error,
         ));
     }
+
+    /**
+     * @Route("/logout", name="logout")
+     * @param Request $request
+     */
+    public function logoutAction(Request $request)
+    {
+        $request->getSession()->invalidate(1);
+        $router = $this->get('router');
+        return new RedirectResponse($router->generate('homepage'), 307);
+    }
 }
