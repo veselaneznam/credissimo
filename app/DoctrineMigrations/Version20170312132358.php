@@ -4,12 +4,15 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170312132358 extends AbstractMigration
+class Version20170312132358 extends AbstractMigration implements ContainerAwareInterface
 {
+    use ContainerAwareTrait;
     /**
      * @param Schema $schema
      */
